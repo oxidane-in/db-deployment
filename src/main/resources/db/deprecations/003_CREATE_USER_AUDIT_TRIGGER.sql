@@ -1,0 +1,70 @@
+-- -- 1) Replace the event‑trigger function to also add FK constraints
+-- CREATE OR REPLACE FUNCTION audit_schema.evt_add_user_columns()
+--     RETURNS event_trigger AS
+-- $$
+-- DECLARE
+--     cmd     RECORD;
+--     tblfq   TEXT; -- fully‑qualified table name, e.g. '"mdm_schema"."foo"'
+--     tbl     TEXT; -- bare table name, for naming constraints
+--     sch     TEXT; -- schema name
+--     fk_name TEXT;
+-- BEGIN
+--     FOR cmd IN
+--         SELECT *
+--         FROM pg_event_trigger_ddl_commands()
+--         WHERE command_tag = 'CREATE TABLE'
+--           AND schema_name IN ('mdm_schema', 'core_schema')
+--         LOOP
+--             tblfq := cmd.object_identity;
+--             sch := cmd.schema_name;
+--             -- extract bare table name from "schema"."table"
+--             tbl := replace(split_part(tblfq, '.', 2), '"', '');
+--
+--             -- a) add the audit columns if missing
+--             EXECUTE format(
+--                 'ALTER TABLE %s
+--                    ADD COLUMN IF NOT EXISTS created_by  UUID NOT NULL,
+--                    ADD COLUMN IF NOT EXISTS updated_by  UUID',
+--                 tblfq
+--                     );
+--
+--             -- b) add created_by FK if it doesn't exist
+--             fk_name := format('fk_%s_created_by_employee', tbl);
+--             IF NOT EXISTS (SELECT 1
+--                            FROM information_schema.table_constraints
+--                            WHERE constraint_schema = sch
+--                              AND constraint_name = fk_name) THEN
+--                 EXECUTE format(
+--                     'ALTER TABLE %s
+--                        ADD CONSTRAINT %I
+--                        FOREIGN KEY (created_by)
+--                          REFERENCES core_schema.employee(employee_id)',
+--                     tblfq, fk_name
+--                         );
+--             END IF;
+--
+--             -- c) add updated_by FK if it doesn't exist
+--             fk_name := format('fk_%s_updated_by_employee', tbl);
+--             IF NOT EXISTS (SELECT 1
+--                            FROM information_schema.table_constraints
+--                            WHERE constraint_schema = sch
+--                              AND constraint_name = fk_name) THEN
+--                 EXECUTE format(
+--                     'ALTER TABLE %s
+--                        ADD CONSTRAINT %I
+--                        FOREIGN KEY (updated_by)
+--                          REFERENCES core_schema.employee(employee_id)',
+--                     tblfq, fk_name
+--                         );
+--             END IF;
+--
+--         END LOOP;
+-- END;
+-- $$ LANGUAGE plpgsql;
+--
+-- -- 2) Re‑install the event trigger (if needed)
+-- DROP EVENT TRIGGER IF EXISTS add_user_columns;
+-- CREATE EVENT TRIGGER add_user_columns
+--     ON ddl_command_end
+--     WHEN TAG IN ('CREATE TABLE')
+-- EXECUTE FUNCTION audit_schema.evt_add_user_columns();

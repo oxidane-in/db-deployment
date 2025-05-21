@@ -1,0 +1,62 @@
+-- This script creates a trigger to automatically set the created_on and updated_on
+-- commented at it requires super_user access for executing this trigger
+
+-- -- 1) DML trigger function in audit_schema: preserves created_on, updates updated_on
+-- CREATE OR REPLACE FUNCTION audit_schema.trg_preserve_created_set_updated()
+--     RETURNS TRIGGER AS
+-- $$
+-- BEGIN
+--     -- preserve original created_on
+--     NEW.created_on := COALESCE(OLD.created_on, now());
+--     -- always bump updated_on
+--     NEW.updated_on := now();
+--     RETURN NEW;
+-- END;
+-- $$ LANGUAGE plpgsql;
+--
+--
+-- -- 2) Revised event‑trigger function in audit_schema: runs after CREATE TABLE,
+-- --    adds audit columns if missing, and hooks up the DML trigger.
+-- CREATE OR REPLACE FUNCTION audit_schema.evt_add_audit_to_table()
+--     RETURNS event_trigger AS
+-- $$
+-- DECLARE
+--     cmd   RECORD;
+--     tblfq TEXT; -- fully‑qualified table name, e.g. "schema"."table"
+--     tbl   TEXT; -- bare table name, for trigger naming
+-- BEGIN
+--     FOR cmd IN
+--         SELECT *
+--         FROM pg_event_trigger_ddl_commands()
+--         WHERE command_tag = 'CREATE TABLE'
+--           AND schema_name NOT IN ('pg_catalog', 'information_schema')
+--         LOOP
+--             tblfq := cmd.object_identity; -- e.g. '"my_schema"."my_table"'
+--             tbl := replace(split_part(tblfq, '.', 2), '"', '');
+--
+--             -- 2a) add created_on & updated_on if they don't exist
+--             EXECUTE format($f$
+--             ALTER TABLE %s
+--               ADD COLUMN IF NOT EXISTS created_on  timestamptz NOT NULL DEFAULT now(),
+--               ADD COLUMN IF NOT EXISTS updated_on  timestamptz NOT NULL DEFAULT now();
+--         $f$, tblfq);
+--
+--             -- 2b) attach the DML trigger
+--             EXECUTE format($f$
+--             CREATE TRIGGER trg_%I_audit_ts
+--               BEFORE UPDATE ON %s
+--               FOR EACH ROW
+--               EXECUTE PROCEDURE audit_schema.trg_preserve_created_set_updated();
+--         $f$, tbl, tblfq);
+--         END LOOP;
+-- END;
+-- $$ LANGUAGE plpgsql;
+--
+--
+-- -- 3) Drop any existing event trigger and recreate it to use audit_schema
+-- DROP EVENT TRIGGER IF EXISTS audit_on_create_table;
+--
+-- CREATE EVENT TRIGGER audit_on_create_table
+--     ON ddl_command_end
+--     WHEN TAG IN ('CREATE TABLE')
+-- EXECUTE FUNCTION audit_schema.evt_add_audit_to_table();
