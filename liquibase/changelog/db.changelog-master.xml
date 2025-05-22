@@ -5,10 +5,14 @@
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
     <include file="changeset-001-init-schema.xml" relativeToChangelogFile="true"/>
-    <changeSet id="002" author="Intkhab">
+    <include file="changeset-000-baseline-sequences.xml" relativeToChangelogFile="true"/>
+    <include file="changeset-000-baseline-mdm.xml" relativeToChangelogFile="true"/>
+    <include file="changeset-000-baseline-core.xml" relativeToChangelogFile="true"/>
+    <include file="changeset-000-baseline-audit.xml" relativeToChangelogFile="true"/>
+    <!-- <changeSet id="002" author="Intkhab">
         <sqlFile path="changeset-002-create-project.sql" relativeToChangelogFile="true"/>
     </changeSet>
     <changeSet id="003" author="Intkhab">
         <sqlFile path="changeset-003-drop-tables.sql" relativeToChangelogFile="true"/>
-    </changeSet>
+    </changeSet> -->
 </databaseChangeLog>

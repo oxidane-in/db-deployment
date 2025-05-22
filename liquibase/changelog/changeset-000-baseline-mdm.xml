@@ -1,0 +1,702 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Lenovo (generated)" id="1747947766490-1">
+        <createTable tableName="business_segment">
+            <column defaultValueComputed="gen_random_uuid()" name="business_segment_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="business_segment_pkey"/>
+            </column>
+            <column defaultValue="(''SEG-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.business_segment_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="business_segment_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="business_segment_desc" type="VARCHAR(255)"/>
+            <column name="business_segment_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-2">
+        <createTable tableName="scope">
+            <column defaultValueComputed="gen_random_uuid()" name="scope_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="scope_pkey"/>
+            </column>
+            <column defaultValue="(''WOS-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.scope_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scope_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scope_desc" type="VARCHAR(255)"/>
+            <column name="scope_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-3">
+        <createTable tableName="status">
+            <column defaultValueComputed="gen_random_uuid()" name="status_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="status_pkey"/>
+            </column>
+            <column defaultValue="(''STS-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.status_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_desc" type="VARCHAR(255)"/>
+            <column name="status_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-4">
+        <createTable tableName="unit_of_measurement">
+            <column defaultValueComputed="gen_random_uuid()" name="uom_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="uom_pkey"/>
+            </column>
+            <column defaultValue="(''UOM-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.unit_of_measurement_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uom_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uom_symbol" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uom_desc" type="VARCHAR(255)"/>
+            <column name="uom_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-5">
+        <createTable tableName="material_manufacturer">
+            <column defaultValueComputed="gen_random_uuid()" name="material_manufacturer_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="material_manufacturer_pkey"/>
+            </column>
+            <column defaultValue="(''MMF-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.material_manufacturer_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_manufacturer_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_manufacturer_contact_person" type="VARCHAR(100)"/>
+            <column name="material_manufacturer_contact_number" type="VARCHAR(15)"/>
+            <column name="material_manufacturer_email" type="VARCHAR(100)"/>
+            <column name="material_manufacturer_gst" type="VARCHAR(15)"/>
+            <column name="material_manufacturer_desc" type="VARCHAR(255)"/>
+            <column name="material_manufacturer_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-6">
+        <createTable tableName="material_vendor">
+            <column defaultValueComputed="gen_random_uuid()" name="material_vendor_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="material_vendor_pkey"/>
+            </column>
+            <column defaultValue="(''MVN-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.material_vendor_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_vendor_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_vendor_contact_person" type="VARCHAR(100)"/>
+            <column name="material_vendor_contact_number" type="VARCHAR(15)"/>
+            <column name="material_vendor_email" type="VARCHAR(100)"/>
+            <column name="material_vendor_gst" type="VARCHAR(15)"/>
+            <column name="material_vendor_desc" type="VARCHAR(255)"/>
+            <column name="material_vendor_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-7">
+        <createTable tableName="material_type">
+            <column defaultValueComputed="gen_random_uuid()" name="material_type_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="material_type_pkey"/>
+            </column>
+            <column defaultValue="(''MTY-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.material_type_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_type_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_type_desc" type="VARCHAR(255)"/>
+            <column name="material_type_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-8">
+        <createTable tableName="material">
+            <column defaultValueComputed="gen_random_uuid()" name="material_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="material_pkey"/>
+            </column>
+            <column defaultValue="(''MAT-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.material_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_rate_per_pack" type="numeric(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_pack_size" type="numeric(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_uom_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_type_id" type="UUID"/>
+            <column name="material_manufacturer_id" type="UUID"/>
+            <column name="material_vendor_id" type="UUID"/>
+            <column name="material_desc" type="VARCHAR(255)"/>
+            <column name="material_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-9">
+        <createTable tableName="line_item_category_one">
+            <column defaultValueComputed="gen_random_uuid()" name="line_item_category_one_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="line_item_category_one_pkey"/>
+            </column>
+            <column defaultValue="(''LC1-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.line_item_category_one_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_item_category_one_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_item_category_one_desc" type="VARCHAR(255)"/>
+            <column name="line_item_category_one_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-10">
+        <createTable tableName="line_item_category_two">
+            <column defaultValueComputed="gen_random_uuid()" name="line_item_category_two_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="line_item_category_two_pkey"/>
+            </column>
+            <column defaultValue="(''LC2-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.line_item_category_two_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_item_category_two_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_item_category_two_desc" type="VARCHAR(255)"/>
+            <column name="line_item_category_two_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-11">
+        <createTable tableName="client">
+            <column defaultValueComputed="gen_random_uuid()" name="client_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="client_pkey"/>
+            </column>
+            <column defaultValue="(''CLI-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.client_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_email" type="VARCHAR(100)"/>
+            <column name="client_contact_number" type="VARCHAR(15)"/>
+            <column name="client_contact_person" type="VARCHAR(100)"/>
+            <column name="client_address" type="TEXT"/>
+            <column name="client_desc" type="VARCHAR(255)"/>
+            <column name="client_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-12">
+        <createTable tableName="other_cost_item">
+            <column defaultValueComputed="gen_random_uuid()" name="other_cost_item_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="other_cost_item_pkey"/>
+            </column>
+            <column defaultValue="(''OCI-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.other_cost_item_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="other_cost_item_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="other_cost_item_desc" type="VARCHAR(500)"/>
+            <column name="other_cost_item_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-13">
+        <createTable tableName="worker_type">
+            <column defaultValueComputed="gen_random_uuid()" name="worker_type_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="worker_type_pkey"/>
+            </column>
+            <column defaultValue="(''WTY-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.worker_type_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_type_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_type_rate" type="numeric(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_type_desc" type="VARCHAR(255)"/>
+            <column name="worker_type_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-14">
+        <createTable tableName="worker">
+            <column defaultValueComputed="gen_random_uuid()" name="worker_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="worker_pkey"/>
+            </column>
+            <column defaultValue="(''WRK-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''sequences.worker_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_code" type="VARCHAR(20)"/>
+            <column name="worker_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_rate" type="numeric(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_type_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_mobile_number" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_state" type="VARCHAR(100)"/>
+            <column name="worker_bank_account" type="VARCHAR(20)"/>
+            <column name="worker_ifsc" type="VARCHAR(11)"/>
+            <column name="worker_birth_date" type="date"/>
+            <column name="worker_doj" type="date"/>
+            <column name="worker_foreman" type="VARCHAR(100)"/>
+            <column name="worker_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-15">
+        <addUniqueConstraint columnNames="external_id" constraintName="business_segment_external_id_key" tableName="business_segment"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-16">
+        <addUniqueConstraint columnNames="business_segment_handle" constraintName="uk_business_segment_handle" tableName="business_segment"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-17">
+        <addUniqueConstraint columnNames="business_segment_name" constraintName="uk_business_segment_name" tableName="business_segment"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-18">
+        <addUniqueConstraint columnNames="external_id" constraintName="scope_external_id_key" tableName="scope"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-19">
+        <addUniqueConstraint columnNames="scope_handle" constraintName="uk_scope_handle" tableName="scope"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-20">
+        <addUniqueConstraint columnNames="scope_name" constraintName="uk_scope_name" tableName="scope"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-21">
+        <addUniqueConstraint columnNames="external_id" constraintName="status_external_id_key" tableName="status"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-22">
+        <addUniqueConstraint columnNames="status_handle" constraintName="uk_status_handle" tableName="status"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-23">
+        <addUniqueConstraint columnNames="status_name" constraintName="uk_status_name" tableName="status"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-24">
+        <addUniqueConstraint columnNames="uom_handle" constraintName="uk_uom_handle" tableName="unit_of_measurement"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-25">
+        <addUniqueConstraint columnNames="uom_name" constraintName="uk_uom_name" tableName="unit_of_measurement"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-26">
+        <addUniqueConstraint columnNames="uom_symbol" constraintName="uk_uom_symbol" tableName="unit_of_measurement"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-27">
+        <addUniqueConstraint columnNames="external_id" constraintName="unit_of_measurement_external_id_key" tableName="unit_of_measurement"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-28">
+        <addUniqueConstraint columnNames="external_id" constraintName="material_manufacturer_external_id_key" tableName="material_manufacturer"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-29">
+        <addUniqueConstraint columnNames="material_manufacturer_handle" constraintName="uk_material_manufacturer_handle" tableName="material_manufacturer"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-30">
+        <addUniqueConstraint columnNames="material_manufacturer_name" constraintName="uk_material_manufacturer_name" tableName="material_manufacturer"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-31">
+        <addUniqueConstraint columnNames="external_id" constraintName="material_vendor_external_id_key" tableName="material_vendor"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-32">
+        <addUniqueConstraint columnNames="material_vendor_handle" constraintName="uk_material_vendor_handle" tableName="material_vendor"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-33">
+        <addUniqueConstraint columnNames="material_vendor_name" constraintName="uk_material_vendor_name" tableName="material_vendor"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-34">
+        <addUniqueConstraint columnNames="external_id" constraintName="material_type_external_id_key" tableName="material_type"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-35">
+        <addUniqueConstraint columnNames="material_type_handle" constraintName="uk_material_type_handle" tableName="material_type"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-36">
+        <addUniqueConstraint columnNames="material_type_name" constraintName="uk_material_type_name" tableName="material_type"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-37">
+        <addUniqueConstraint columnNames="external_id" constraintName="material_external_id_key" tableName="material"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-38">
+        <addUniqueConstraint columnNames="material_handle" constraintName="uk_material_handle" tableName="material"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-39">
+        <addUniqueConstraint columnNames="material_name" constraintName="uk_material_name" tableName="material"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-40">
+        <addUniqueConstraint columnNames="external_id" constraintName="line_item_category_one_external_id_key" tableName="line_item_category_one"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-41">
+        <addUniqueConstraint columnNames="line_item_category_one_handle" constraintName="uk_line_item_category_one_handle" tableName="line_item_category_one"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-42">
+        <addUniqueConstraint columnNames="line_item_category_one_name" constraintName="uk_line_item_category_one_name" tableName="line_item_category_one"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-43">
+        <addUniqueConstraint columnNames="external_id" constraintName="line_item_category_two_external_id_key" tableName="line_item_category_two"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-44">
+        <addUniqueConstraint columnNames="line_item_category_two_handle" constraintName="uk_line_item_category_two_handle" tableName="line_item_category_two"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-45">
+        <addUniqueConstraint columnNames="line_item_category_two_name" constraintName="uk_line_item_category_two_name" tableName="line_item_category_two"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-46">
+        <addUniqueConstraint columnNames="external_id" constraintName="client_external_id_key" tableName="client"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-47">
+        <addUniqueConstraint columnNames="client_handle" constraintName="uk_client_handle" tableName="client"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-48">
+        <addUniqueConstraint columnNames="client_name" constraintName="uk_client_name" tableName="client"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-49">
+        <addUniqueConstraint columnNames="external_id" constraintName="other_cost_item_external_id_key" tableName="other_cost_item"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-50">
+        <addUniqueConstraint columnNames="other_cost_item_handle" constraintName="uk_other_cost_item_handle" tableName="other_cost_item"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-51">
+        <addUniqueConstraint columnNames="other_cost_item_name" constraintName="uk_other_cost_item_name" tableName="other_cost_item"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-52">
+        <addUniqueConstraint columnNames="worker_type_handle" constraintName="uk_worker_type_handle" tableName="worker_type"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-53">
+        <addUniqueConstraint columnNames="worker_type_name" constraintName="uk_worker_type_name" tableName="worker_type"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-54">
+        <addUniqueConstraint columnNames="external_id" constraintName="worker_type_external_id_key" tableName="worker_type"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-55">
+        <addUniqueConstraint columnNames="worker_code" constraintName="uk_worker_code" tableName="worker"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-56">
+        <addUniqueConstraint columnNames="worker_handle" constraintName="uk_worker_handle" tableName="worker"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-57">
+        <addUniqueConstraint columnNames="worker_mobile_number" constraintName="uk_worker_mobile_number" tableName="worker"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-58">
+        <addUniqueConstraint columnNames="worker_name" constraintName="uk_worker_name" tableName="worker"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-59">
+        <addUniqueConstraint columnNames="external_id" constraintName="worker_external_id_key" tableName="worker"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-60">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="business_segment" constraintName="fk_businesssegment_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-61">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="business_segment" constraintName="fk_businesssegment_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-62">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="client" constraintName="fk_client_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-63">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="client" constraintName="fk_client_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-64">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="line_item_category_one" constraintName="fk_lineitemcategoryone_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-65">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="line_item_category_one" constraintName="fk_lineitemcategoryone_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-66">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="line_item_category_two" constraintName="fk_lineitemcategorytwo_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-67">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="line_item_category_two" constraintName="fk_lineitemcategorytwo_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-68">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="material" constraintName="fk_material_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-69">
+        <addForeignKeyConstraint baseColumnNames="material_manufacturer_id" baseTableName="material" constraintName="fk_material_materialmanufacturer" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="material_manufacturer_id" referencedTableName="material_manufacturer" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-70">
+        <addForeignKeyConstraint baseColumnNames="material_type_id" baseTableName="material" constraintName="fk_material_materialtype" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="material_type_id" referencedTableName="material_type" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-71">
+        <addForeignKeyConstraint baseColumnNames="material_vendor_id" baseTableName="material" constraintName="fk_material_materialvendor" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="material_vendor_id" referencedTableName="material_vendor" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-72">
+        <addForeignKeyConstraint baseColumnNames="material_uom_id" baseTableName="material" constraintName="fk_material_uom" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="uom_id" referencedTableName="unit_of_measurement" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-73">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="material" constraintName="fk_material_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-74">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="material_manufacturer" constraintName="fk_materialmanufacturer_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-75">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="material_manufacturer" constraintName="fk_materialmanufacturer_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-76">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="material_type" constraintName="fk_materialtype_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-77">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="material_type" constraintName="fk_materialtype_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-78">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="material_vendor" constraintName="fk_materialvendor_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-79">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="material_vendor" constraintName="fk_materialvendor_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-80">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="other_cost_item" constraintName="fk_othercostitem_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-81">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="other_cost_item" constraintName="fk_othercostitem_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-82">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="scope" constraintName="fk_scope_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-83">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="scope" constraintName="fk_scope_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-84">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="status" constraintName="fk_status_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-85">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="status" constraintName="fk_status_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-86">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="unit_of_measurement" constraintName="fk_uom_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-87">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="unit_of_measurement" constraintName="fk_uom_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-88">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="worker" constraintName="fk_worker_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-89">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="worker" constraintName="fk_worker_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-90">
+        <addForeignKeyConstraint baseColumnNames="worker_type_id" baseTableName="worker" constraintName="fk_worker_workertype" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="worker_type_id" referencedTableName="worker_type" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-91">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="worker_type" constraintName="fk_workertype_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1747947766490-92">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="worker_type" constraintName="fk_workertype_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" referencedTableSchemaName="core_schema" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
