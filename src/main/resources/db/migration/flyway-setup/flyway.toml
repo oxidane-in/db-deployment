@@ -1,0 +1,32 @@
+databaseType = "PostgreSql"
+id = "8e4bed76-5705-4eb9-a5a6-8a1ff7cb0e2e"
+name = "flyway-setup"
+
+[flyway]
+locations = [ "filesystem:migrations" ]
+mixed = true
+outOfOrder = true
+schemaModelLocation = "schema-model"
+validateMigrationNaming = true
+
+  [flyway.check]
+  majorTolerance = 0
+
+[flywayDesktop]
+developmentEnvironment = "development"
+shadowEnvironment = "shadow"
+enableMigrations = false
+
+[redgateCompare]
+filterFile = "filter.rgf"
+
+[redgateCompare.postgresql.options.behavior]
+detectRenames = "identical-only"
+
+[redgateCompare.postgresql.options.ignores]
+ignoreNewlinesInTextObjects = "off"
+
+[environments.work-done-test]
+url = "jdbc:postgresql://ep-crimson-mud-a1ec79qp-pooler.ap-southeast-1.aws.neon.tech:5432/work-done-test"
+schemas = [ "core_schema" ]
+displayName = "work-done-test"
