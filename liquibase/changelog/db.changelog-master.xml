@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+       http://www.liquibase.org/xml/ns/dbchangelog
+       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <!-- New changesets will be added here -->
+    <include file="liquibase\changelog\sequences\db.changelog-sequences-baseline.xml"/>
+    <include file="liquibase\changelog\mdm\db.changelog-mdm-baseline.xml"/>
+    <include file="liquibase\changelog\core\db.changelog-core-baseline.xml"/>
+    <include file="liquibase\changelog\audit\db.changelog-audit-baseline.xml"/>
+</databaseChangeLog>

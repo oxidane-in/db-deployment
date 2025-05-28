@@ -1,0 +1,810 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="IntkhabShaikh" id="1748426391996-1">
+        <createTable tableName="employee">
+            <column defaultValueComputed="gen_random_uuid()" name="employee_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="employee_pkey"/>
+            </column>
+            <column defaultValue="(''EMP-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''employee_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="employee_code" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="employee_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-2">
+        <createTable tableName="project">
+            <column defaultValueComputed="gen_random_uuid()" name="project_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="project_pkey"/>
+            </column>
+            <column defaultValue="(''PRJ-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''project_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_code" type="VARCHAR(50)"/>
+            <column name="project_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_location" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_city" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_state" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_manager_email" type="VARCHAR(100)"/>
+            <column name="project_manager_contact_number" type="VARCHAR(15)"/>
+            <column name="project_manager_contact_person" type="VARCHAR(100)"/>
+            <column name="project_handle" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_status_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-3">
+        <createTable tableName="line_item_template">
+            <column defaultValueComputed="gen_random_uuid()" name="line_item_template_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="line_item_template_pkey"/>
+            </column>
+            <column defaultValue="(''LIT-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''line_item_template_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_item_template_name" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_item_template_uom_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_item_template_category_one_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_item_template_category_two_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_item_template_material_cost_per_uom" type="numeric(18, 2)"/>
+            <column name="line_item_template_worker_cost_per_uom" type="numeric(18, 2)"/>
+            <column name="line_item_template_desc" type="VARCHAR(255)"/>
+            <column name="line_item_template_handle" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-4">
+        <createTable tableName="li_material_template">
+            <column defaultValueComputed="gen_random_uuid()" name="li_material_template_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="li_material_template_pkey"/>
+            </column>
+            <column name="line_item_template_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="material_consumption_per_uom" type="numeric(18, 2)"/>
+            <column name="material_rate_per_uom" type="numeric(18, 2)"/>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-5">
+        <createTable tableName="li_worker_template">
+            <column defaultValueComputed="gen_random_uuid()" name="li_worker_template_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="li_worker_template_pkey"/>
+            </column>
+            <column name="line_item_template_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_type_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="worker_type_hajri_per_uom" type="numeric(18, 2)"/>
+            <column name="worker_type_wage_per_uom" type="numeric(18, 2)"/>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-6">
+        <createTable tableName="work_order">
+            <column defaultValueComputed="gen_random_uuid()" name="work_order_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="work_order_pkey"/>
+            </column>
+            <column defaultValue="(''WOR-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''work_order_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="work_order_number" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="work_order_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="work_order_start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="work_order_tenure" type="VARCHAR(50)"/>
+            <column name="work_order_end_date_actual" type="date"/>
+            <column name="work_order_scope_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="work_order_status_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="work_order_desc" type="VARCHAR(255)"/>
+            <column name="work_order_handle" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-7">
+        <createTable tableName="project_other_cost_planned">
+            <column defaultValueComputed="gen_random_uuid()" name="project_other_cost_planned_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="project_other_cost_planned_pkey"/>
+            </column>
+            <column defaultValue="(''PCP-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''project_other_cost_planned_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_other_cost_planned_amount" type="numeric(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_other_cost_planned_remark" type="VARCHAR(255)"/>
+            <column name="other_cost_item_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-8">
+        <createTable tableName="wo_other_cost_planned">
+            <column defaultValueComputed="gen_random_uuid()" name="wo_other_cost_planned_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="wo_other_cost_planned_pkey"/>
+            </column>
+            <column defaultValue="(''WOP-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''wo_other_cost_planned_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_other_cost_planned_amount" type="numeric(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_other_cost_planned_remark" type="VARCHAR(255)"/>
+            <column name="other_cost_item_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="work_order_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-9">
+        <createTable tableName="wo_line_item_details">
+            <column defaultValueComputed="gen_random_uuid()" name="wo_line_item_details_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="wo_line_item_details_pkey"/>
+            </column>
+            <column defaultValue="(''WLD-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''wo_line_item_details_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="item_no" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_line_item_category_one_id" type="UUID"/>
+            <column name="wo_line_item_category_two_id" type="UUID"/>
+            <column name="wo_line_item_header" type="VARCHAR(1000)"/>
+            <column name="wo_line_item_name" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_line_item_uom_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_line_item_quantity" type="numeric(18, 2)"/>
+            <column name="wo_line_item_rate" type="numeric(18, 2)"/>
+            <column name="line_item_material_cost_per_uom" type="numeric(18, 2)"/>
+            <column name="line_item_worker_cost_per_uom" type="numeric(18, 2)"/>
+            <column name="work_order_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-10">
+        <createTable tableName="wo_material_details">
+            <column defaultValueComputed="gen_random_uuid()" name="wo_material_detail_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="wo_material_details_pkey"/>
+            </column>
+            <column defaultValue="(''WMD-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''wo_material_details_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_material_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_material_consumption_per_uom" type="numeric(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_material_rate_per_uom" type="numeric(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_line_item_details_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-11">
+        <createTable tableName="wo_worker_details">
+            <column defaultValueComputed="gen_random_uuid()" name="wo_worker_detail_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="wo_worker_details_pkey"/>
+            </column>
+            <column defaultValue="(''WWD-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''wo_worker_details_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_worker_type_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_worker_type_hajri_per_uom" type="numeric(18, 2)"/>
+            <column name="wo_worker_type_wage_per_uom" type="numeric(18, 2)"/>
+            <column name="wo_line_item_details_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-12">
+        <createTable tableName="wo_other_cost_actual">
+            <column defaultValueComputed="gen_random_uuid()" name="wo_other_cost_actual_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="wo_other_cost_actual_pkey"/>
+            </column>
+            <column defaultValue="(''WOA-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''wo_other_cost_actual_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_other_cost_actual_amount" type="numeric(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_other_cost_actual_remark" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_other_cost_actual_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wo_other_cost_planned_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-13">
+        <createTable tableName="project_other_cost_actual">
+            <column defaultValueComputed="gen_random_uuid()" name="project_other_cost_actual_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="project_other_cost_actual_pkey"/>
+            </column>
+            <column defaultValue="(''PCA-''::text || (EXTRACT(year FROM CURRENT_TIMESTAMP))::text) || ''-''::text) || lpad((nextval(''project_other_cost_actual_externalid_seq''::regclass))::text, 4, ''0''::text" name="external_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_other_cost_actual_amount" type="numeric(18, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_other_cost_actual_remark" type="VARCHAR(500)"/>
+            <column name="project_other_cost_actual_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_other_cost_planned_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-14">
+        <createTable tableName="area_type">
+            <column defaultValueComputed="gen_random_uuid()" name="area_type_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="area_type_pkey"/>
+            </column>
+            <column name="area_type_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="area_type_handle" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="has_quantity" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-15">
+        <createTable tableName="work_order_layout">
+            <column defaultValueComputed="gen_random_uuid()" name="work_order_layout_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="work_order_layout_pkey"/>
+            </column>
+            <column name="work_order_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="area_type_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="UUID"/>
+            <column defaultValueComputed="now()" name="updated_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-16">
+        <createTable tableName="flyway_schema_history">
+            <column name="installed_rank" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="flyway_schema_history_pk"/>
+            </column>
+            <column name="version" type="VARCHAR(50)"/>
+            <column name="description" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="script" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="checksum" type="INTEGER"/>
+            <column name="installed_by" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="installed_on" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="execution_time" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="success" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-17">
+        <addUniqueConstraint columnNames="employee_code" constraintName="uk_employee_code" tableName="employee"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-18">
+        <addUniqueConstraint columnNames="external_id" constraintName="uk_employee_external_id" tableName="employee"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-19">
+        <addUniqueConstraint columnNames="employee_name" constraintName="uk_employee_name" tableName="employee"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-20">
+        <addUniqueConstraint columnNames="external_id" constraintName="project_external_id_key" tableName="project"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-21">
+        <addUniqueConstraint columnNames="project_code" constraintName="project_project_code_key" tableName="project"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-22">
+        <addUniqueConstraint columnNames="project_handle" constraintName="project_project_handle_key" tableName="project"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-23">
+        <addUniqueConstraint columnNames="project_name" constraintName="project_project_name_key" tableName="project"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-24">
+        <addUniqueConstraint columnNames="external_id" constraintName="line_item_template_external_id_key" tableName="line_item_template"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-25">
+        <addUniqueConstraint columnNames="line_item_template_handle" constraintName="line_item_template_line_item_template_handle_key" tableName="line_item_template"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-26">
+        <addUniqueConstraint columnNames="line_item_template_name" constraintName="line_item_template_line_item_template_name_key" tableName="line_item_template"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-27">
+        <addUniqueConstraint columnNames="external_id" constraintName="work_order_external_id_key" tableName="work_order"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-28">
+        <addUniqueConstraint columnNames="work_order_handle" constraintName="work_order_work_order_handle_key" tableName="work_order"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-29">
+        <addUniqueConstraint columnNames="work_order_name" constraintName="work_order_work_order_name_key" tableName="work_order"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-30">
+        <addUniqueConstraint columnNames="work_order_number" constraintName="work_order_work_order_number_key" tableName="work_order"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-31">
+        <addUniqueConstraint columnNames="external_id" constraintName="project_other_cost_planned_external_id_key" tableName="project_other_cost_planned"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-32">
+        <addUniqueConstraint columnNames="external_id" constraintName="wo_other_cost_planned_external_id_key" tableName="wo_other_cost_planned"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-33">
+        <addUniqueConstraint columnNames="external_id" constraintName="wo_line_item_details_external_id_key" tableName="wo_line_item_details"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-34">
+        <addUniqueConstraint columnNames="item_no" constraintName="wo_line_item_details_item_no_key" tableName="wo_line_item_details"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-35">
+        <addUniqueConstraint columnNames="wo_line_item_name" constraintName="wo_line_item_details_wo_line_item_name_key" tableName="wo_line_item_details"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-36">
+        <addUniqueConstraint columnNames="external_id" constraintName="wo_material_details_external_id_key" tableName="wo_material_details"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-37">
+        <addUniqueConstraint columnNames="external_id" constraintName="wo_worker_details_external_id_key" tableName="wo_worker_details"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-38">
+        <addUniqueConstraint columnNames="external_id" constraintName="wo_other_cost_actual_external_id_key" tableName="wo_other_cost_actual"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-39">
+        <addUniqueConstraint columnNames="external_id" constraintName="project_other_cost_actual_external_id_key" tableName="project_other_cost_actual"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-40">
+        <addUniqueConstraint columnNames="area_type_name" constraintName="area_type_area_type_name_key" tableName="area_type"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-41">
+        <createIndex indexName="idx_work_order_layout_wo_id" tableName="work_order_layout">
+            <column name="work_order_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-42">
+        <addUniqueConstraint columnNames="work_order_id, area_type_id" constraintName="uq_work_order_area_type" tableName="work_order_layout"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-43">
+        <createIndex indexName="flyway_schema_history_s_idx" tableName="flyway_schema_history">
+            <column name="success"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-44">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="area_type" constraintName="area_type_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-45">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="area_type" constraintName="area_type_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-46">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="employee" constraintName="fk_employee_createdby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-47">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="employee" constraintName="fk_employee_updatedby_employee" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-48">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="li_material_template" constraintName="li_material_template_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-49">
+        <addForeignKeyConstraint baseColumnNames="line_item_template_id" baseTableName="li_material_template" constraintName="li_material_template_line_item_template_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="line_item_template_id" referencedTableName="line_item_template" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-50">
+        <addForeignKeyConstraint baseColumnNames="line_item_template_id" baseTableName="li_material_template" constraintName="li_material_template_material_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="line_item_template_id" referencedTableName="line_item_template" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-51">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="li_material_template" constraintName="li_material_template_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-52">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="li_worker_template" constraintName="li_worker_template_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-53">
+        <addForeignKeyConstraint baseColumnNames="line_item_template_id" baseTableName="li_worker_template" constraintName="li_worker_template_line_item_template_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="line_item_template_id" referencedTableName="line_item_template" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-54">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="li_worker_template" constraintName="li_worker_template_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-55">
+        <addForeignKeyConstraint baseColumnNames="worker_type_id" baseTableName="li_worker_template" constraintName="li_worker_template_worker_type_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="worker_type_id" referencedTableName="worker_type" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-56">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="line_item_template" constraintName="line_item_template_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-57">
+        <addForeignKeyConstraint baseColumnNames="line_item_template_category_one_id" baseTableName="line_item_template" constraintName="line_item_template_line_item_template_category_one_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="line_item_category_one_id" referencedTableName="line_item_category_one" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-58">
+        <addForeignKeyConstraint baseColumnNames="line_item_template_category_two_id" baseTableName="line_item_template" constraintName="line_item_template_line_item_template_category_two_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="line_item_category_two_id" referencedTableName="line_item_category_two" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-59">
+        <addForeignKeyConstraint baseColumnNames="line_item_template_uom_id" baseTableName="line_item_template" constraintName="line_item_template_line_item_template_uom_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="uom_id" referencedTableName="unit_of_measurement" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-60">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="line_item_template" constraintName="line_item_template_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-61">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="project" constraintName="project_client_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="client_id" referencedTableName="client" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-62">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="project" constraintName="project_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-63">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="project_other_cost_actual" constraintName="project_other_cost_actual_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-64">
+        <addForeignKeyConstraint baseColumnNames="project_other_cost_planned_id" baseTableName="project_other_cost_actual" constraintName="project_other_cost_actual_project_other_cost_planned_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="project_other_cost_planned_id" referencedTableName="project_other_cost_planned" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-65">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="project_other_cost_actual" constraintName="project_other_cost_actual_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-66">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="project_other_cost_planned" constraintName="project_other_cost_planned_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-67">
+        <addForeignKeyConstraint baseColumnNames="other_cost_item_id" baseTableName="project_other_cost_planned" constraintName="project_other_cost_planned_other_cost_item_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="other_cost_item_id" referencedTableName="other_cost_item" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-68">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="project_other_cost_planned" constraintName="project_other_cost_planned_project_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="project_id" referencedTableName="project" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-69">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="project_other_cost_planned" constraintName="project_other_cost_planned_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-70">
+        <addForeignKeyConstraint baseColumnNames="project_status_id" baseTableName="project" constraintName="project_project_status_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="status_id" referencedTableName="status" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-71">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="project" constraintName="project_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-72">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="wo_line_item_details" constraintName="wo_line_item_details_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-73">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="wo_line_item_details" constraintName="wo_line_item_details_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-74">
+        <addForeignKeyConstraint baseColumnNames="wo_line_item_category_one_id" baseTableName="wo_line_item_details" constraintName="wo_line_item_details_wo_line_item_category_one_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="line_item_category_one_id" referencedTableName="line_item_category_one" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-75">
+        <addForeignKeyConstraint baseColumnNames="wo_line_item_category_two_id" baseTableName="wo_line_item_details" constraintName="wo_line_item_details_wo_line_item_category_two_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="line_item_category_two_id" referencedTableName="line_item_category_two" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-76">
+        <addForeignKeyConstraint baseColumnNames="wo_line_item_uom_id" baseTableName="wo_line_item_details" constraintName="wo_line_item_details_wo_line_item_uom_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="uom_id" referencedTableName="unit_of_measurement" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-77">
+        <addForeignKeyConstraint baseColumnNames="work_order_id" baseTableName="wo_line_item_details" constraintName="wo_line_item_details_work_order_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="work_order_id" referencedTableName="work_order" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-78">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="wo_material_details" constraintName="wo_material_details_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-79">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="wo_material_details" constraintName="wo_material_details_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-80">
+        <addForeignKeyConstraint baseColumnNames="wo_line_item_details_id" baseTableName="wo_material_details" constraintName="wo_material_details_wo_line_item_details_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="wo_line_item_details_id" referencedTableName="wo_line_item_details" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-81">
+        <addForeignKeyConstraint baseColumnNames="wo_material_id" baseTableName="wo_material_details" constraintName="wo_material_details_wo_material_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="material_id" referencedTableName="material" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-82">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="wo_other_cost_actual" constraintName="wo_other_cost_actual_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-83">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="wo_other_cost_actual" constraintName="wo_other_cost_actual_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-84">
+        <addForeignKeyConstraint baseColumnNames="wo_other_cost_planned_id" baseTableName="wo_other_cost_actual" constraintName="wo_other_cost_actual_wo_other_cost_planned_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="wo_other_cost_planned_id" referencedTableName="wo_other_cost_planned" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-85">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="wo_other_cost_planned" constraintName="wo_other_cost_planned_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-86">
+        <addForeignKeyConstraint baseColumnNames="other_cost_item_id" baseTableName="wo_other_cost_planned" constraintName="wo_other_cost_planned_other_cost_item_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="other_cost_item_id" referencedTableName="other_cost_item" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-87">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="wo_other_cost_planned" constraintName="wo_other_cost_planned_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-88">
+        <addForeignKeyConstraint baseColumnNames="work_order_id" baseTableName="wo_other_cost_planned" constraintName="wo_other_cost_planned_work_order_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="work_order_id" referencedTableName="work_order" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-89">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="wo_worker_details" constraintName="wo_worker_details_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-90">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="wo_worker_details" constraintName="wo_worker_details_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-91">
+        <addForeignKeyConstraint baseColumnNames="wo_line_item_details_id" baseTableName="wo_worker_details" constraintName="wo_worker_details_wo_line_item_details_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="wo_line_item_details_id" referencedTableName="wo_line_item_details" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-92">
+        <addForeignKeyConstraint baseColumnNames="wo_worker_type_id" baseTableName="wo_worker_details" constraintName="wo_worker_details_wo_worker_type_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="worker_type_id" referencedTableName="worker_type" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-93">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="work_order" constraintName="work_order_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-94">
+        <addForeignKeyConstraint baseColumnNames="area_type_id" baseTableName="work_order_layout" constraintName="work_order_layout_area_type_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="area_type_id" referencedTableName="area_type" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-95">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="work_order_layout" constraintName="work_order_layout_created_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-96">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="work_order_layout" constraintName="work_order_layout_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-97">
+        <addForeignKeyConstraint baseColumnNames="work_order_id" baseTableName="work_order_layout" constraintName="work_order_layout_work_order_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="work_order_id" referencedTableName="work_order" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-98">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="work_order" constraintName="work_order_project_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="project_id" referencedTableName="project" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-99">
+        <addForeignKeyConstraint baseColumnNames="updated_by" baseTableName="work_order" constraintName="work_order_updated_by_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="employee_id" referencedTableName="employee" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-100">
+        <addForeignKeyConstraint baseColumnNames="work_order_scope_id" baseTableName="work_order" constraintName="work_order_work_order_scope_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="scope_id" referencedTableName="scope" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+    <changeSet author="IntkhabShaikh" id="1748426391996-101">
+        <addForeignKeyConstraint baseColumnNames="work_order_status_id" baseTableName="work_order" constraintName="work_order_work_order_status_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="status_id" referencedTableName="status" referencedTableSchemaName="mdm_schema" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
