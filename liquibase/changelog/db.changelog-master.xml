@@ -4,9 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="
        http://www.liquibase.org/xml/ns/dbchangelog
-       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.10.xsd">
 
     <!-- New changesets will be added here -->
+    <include file="init\db.changelog-000-set-timezone.sql" relativeToChangelogFile="true"/>
+    <include file="init\db.changelog-001-create-schemas.sql" relativeToChangelogFile="true"/>
+
     <include file="liquibase\changelog\sequences\db.changelog-sequences-baseline.xml"/>
     <include file="liquibase\changelog\mdm\db.changelog-mdm-baseline.xml"/>
     <include file="liquibase\changelog\core\db.changelog-core-baseline.xml"/>
