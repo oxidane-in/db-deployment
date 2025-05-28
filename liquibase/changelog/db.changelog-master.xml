@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+       http://www.liquibase.org/xml/ns/dbchangelog
+       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.10.xsd">
+
+    <!-- database initialization -->
+    <include file="db.changelog-0000-init-timezone.sql" relativeToChangelogFile="true"/>
+    <include file="db.changelog-0001-init-schemas.sql" relativeToChangelogFile="true"/>
+
+    <!-- table baseline, creation -->
+    <include file="db.changelog-0002-sequences-baseline.sql" relativeToChangelogFile="true"/>
+    <include file="db.changelog-0003-init-employee-table.sql" relativeToChangelogFile="true"/>
+    <include file="db.changelog-0004-mdm-baseline.sql" relativeToChangelogFile="true"/>
+    <include file="db.changelog-0005-core-baseline.sql" relativeToChangelogFile="true"/>
+    <include file="db.changelog-0006-create-audit-project_other_costs.sql" relativeToChangelogFile="true"/>
+    <include file="db.changelog-0007-create-audit-fn-project_other_costs.sql" relativeToChangelogFile="true"/>
+
+    <!-- table seed data -->
+    <include file="db.changelog-0008-mdm-seed.sql" relativeToChangelogFile="true"/>
+    <include file="db.changelog-0009-mdm-seed-01.sql" relativeToChangelogFile="true"/>
+    <include file="db.changelog-0009-mdm-seed-02.sql" relativeToChangelogFile="true"/>
+</databaseChangeLog>
