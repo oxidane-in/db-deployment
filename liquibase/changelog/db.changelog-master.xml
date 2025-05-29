@@ -22,4 +22,7 @@
     <include file="db.changelog-0008-mdm-seed.sql" relativeToChangelogFile="true"/>
     <include file="db.changelog-0009-mdm-seed-01.sql" relativeToChangelogFile="true"/>
     <include file="db.changelog-0009-mdm-seed-02.sql" relativeToChangelogFile="true"/>
+
+    <include file="db.changelog-0009-mdm-seed-03-material-setup.sql" relativeToChangelogFile="true"/>
+    <include file="db.changelog-0009-mdm-seed-03-material.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
